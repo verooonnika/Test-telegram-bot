@@ -6,9 +6,30 @@ const options = {
 const bot = new TelegramBot(TOKEN, options);
 
 bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name}`);
+  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${respon1}`);
 })
 
+var respon1;
+var q = 'SELECT Id, Name, FROM Account LIMIT 1';
+
+
+org.query({ query: q }, function(err, resp){
+respon1 = resp.records[0];
+  if(!err && resp.records) {
+
+    var acc = resp.records[0];
+    acc.set('Name', 'Really Spiffy Cleaners');
+    acc.set('Industry', 'Cleaners');
+
+    org.update({ sobject: acc, oauth: oauth }, function(err, resp){
+      if(!err) console.log('It worked!');
+    });
+
+  }
+});
+
+
+/*
 // Matches /photo
 bot.onText(/\/photo/, function onPhotoText(msg) {
   // From file path
@@ -85,4 +106,4 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   }
 
   bot.editMessageText(text, opts);
-});
+});*/
