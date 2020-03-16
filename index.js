@@ -14,7 +14,7 @@ conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
   if (err) { return console.error(err); }
   conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
     if (err) { return console.error(err); }
-    r = res;
+    r = res.Name;
     console.log(res);
   });
 });
