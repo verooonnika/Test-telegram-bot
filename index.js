@@ -5,9 +5,6 @@ const options = {
 };
 const bot = new TelegramBot(TOKEN, options);
 
-bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
-})
 
 var r;
 
@@ -21,6 +18,9 @@ conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
     console.log(res);
   });
 });
+bot.on('message', msg => {
+  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
+})
 
 
 /*var respon1;
