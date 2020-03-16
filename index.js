@@ -34,6 +34,7 @@ bot.onText(/\/name/, function onEchoText(msg) {
     conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
       if (err) { return console.error(err); }
       r = res.records[0].Name;
+      console.log('sdkfjs');
       console.debug(res.records[0].msg.text);
     });
   });
