@@ -9,7 +9,27 @@ bot.on('message', msg => {
   bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name}`);
 })
 
-bot.onText(/\/test/, function onLoveText(msg) {
+// Matches /photo
+bot.onText(/\/photo/, function onPhotoText(msg) {
+  // From file path
+  const photo = `${__dirname}/../test/data/photo.gif`;
+  bot.sendPhoto(msg.chat.id, photo, {
+    caption: "I'm a bot!"
+  });
+});
+
+
+// Matches /audio
+bot.onText(/\/audio/, function onAudioText(msg) {
+  // From HTTP request
+  const url = 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Example.ogg';
+  const audio = request(url);
+  bot.sendAudio(msg.chat.id, audio);
+});
+
+
+// Matches /love
+bot.onText(/\/love/, function onLoveText(msg) {
   const opts = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -22,6 +42,32 @@ bot.onText(/\/test/, function onLoveText(msg) {
   bot.sendMessage(msg.chat.id, 'Do you love me?', opts);
 });
 
+
+// Matches /echo [whatever]
+bot.onText(/\/echo (.+)/, function onEchoText(msg, match) {
+  const resp = match[1];
+  bot.sendMessage(msg.chat.id, resp);
+});
+
+
+// Matches /editable
+bot.onText(/\/editable/, function onEditableText(msg) {
+  const opts = {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: 'Edit Text',
+            // we shall check for this value when we listen
+            // for "callback_query"
+            callback_data: 'edit'
+          }
+        ]
+      ]
+    }
+  };
+  bot.sendMessage(msg.from.id, 'Original Text', opts);
+});
 
 
 // Handle callback queries
