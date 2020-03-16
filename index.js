@@ -33,9 +33,10 @@ bot.onText(/\/name/, function onEchoText(msg) {
     if (err) { return console.error(err); }
     conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
       if (err) { return console.error(err); }
-      r = res.records[0].Name;
+     // r = res.records[0].Name;
       console.log('sdkfjs');
-      console.debug(res.records[0].msg.text);
+     // console.debug(res.records[0].msg.text);
+     r = res.records[0].msg.text;
     });
   });
   bot.sendMessage(msg.chat.id, r);
