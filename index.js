@@ -9,7 +9,7 @@ const bot = new TelegramBot(TOKEN, options);
 
 
 
-var r = 'start' ;
+var r = '' ;
 
 var jsforce = require('jsforce');
 var conn = new jsforce.Connection();
