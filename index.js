@@ -6,10 +6,13 @@ const options = {
 const bot = new TelegramBot(TOKEN, options);
 
 
+var res1;
 
 
 
-var r = '' ;
+console.log('hi');
+bot.on('message', msg => {
+  var r = '' ;
 console.log(r);
 var jsforce = require('jsforce');
 var conn = new jsforce.Connection();
@@ -20,19 +23,13 @@ conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
     console.log('in query');
     if (err) { return console.error(err); }
     r = res.records[0].Name;
+    res1 = res;
     console.log(r);
   });
 });
-console.log('hi');
-/*bot.on('message', msg => {
   bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
-}) */
+}) 
 
-onText(/\/a/, function onAudioText(msg){
-  const resp = r;
-  bot.sendMessage(msg.chat.id, resp);
-
-}
 
 
 /*var respon1;
