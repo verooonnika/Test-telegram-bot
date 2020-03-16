@@ -1,14 +1,15 @@
 const TOKEN = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
-const TelegramBot = require('..');
-const request = require('request');
+const TelegramBot = require('node-telegram-bot-api');
 const options = {
   polling: true
 };
 const bot = new TelegramBot(TOKEN, options);
 
+bot.on('message', msg => {
+  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name}`);
+})
 
-// Matches /start
-bot.onText(/\/start/, function onLoveText(msg) {
+bot.onText(/\/test/, function onLoveText(msg) {
   const opts = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
