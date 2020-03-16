@@ -1,0 +1,14 @@
+{
+    "name": "heroku_bot",
+    "version": "0.1.0",
+    "description": "uvolte",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test script\" && exit 1"
+    },
+    "author": "ya",
+    "license": "VILEYKA CORP",
+    "dependencies": {
+        "node-telegram-bot-api": "^0.40.0"
+    }
+}
