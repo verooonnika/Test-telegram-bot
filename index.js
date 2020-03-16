@@ -9,7 +9,7 @@ bot.on('message', msg => {
   bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla`);
 })
 
-var respon1;
+/*var respon1;
 var q = 'SELECT Id, Name, FROM Account LIMIT 1';
 
 
@@ -26,7 +26,7 @@ respon1 = resp.records[0];
     });
 
   }
-});
+});*/
 
 
 /*
