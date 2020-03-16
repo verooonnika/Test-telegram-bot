@@ -22,9 +22,22 @@ conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
   });
 });
 
-bot.on('message', msg => {
+/*bot.on('message', msg => {
   bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
-}) 
+});*/
+
+// Matches /echo [whatever]
+bot.onText(/\/name/, function onEchoText(msg) {
+  conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
+
+    if (err) { return console.error(err); }
+    conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
+      if (err) { return console.error(err); }
+      r = res.records[0].Name;
+    });
+  });
+  bot.sendMessage(msg.chat.id, r);
+});
 
 
 
