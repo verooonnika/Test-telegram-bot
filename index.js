@@ -6,8 +6,10 @@ const options = {
 const bot = new TelegramBot(TOKEN, options);
 
 bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla`);
+  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
 })
+
+var r;
 
 var jsforce = require('jsforce');
 var conn = new jsforce.Connection();
@@ -15,6 +17,7 @@ conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
   if (err) { return console.error(err); }
   conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
     if (err) { return console.error(err); }
+    r = res;
     console.log(res);
   });
 });
