@@ -6,21 +6,27 @@ const options = {
 const bot = new TelegramBot(TOKEN, options);
 
 
-var r;
 
-var jsforce = require('jsforce');
-var conn = new jsforce.Connection();
-conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
-  if (err) { return console.error(err); }
-  conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
-    if (err) { return console.error(err); }
-    r = res[0].Name;
-    console.log(res);
-  });
-});
 bot.on('message', msg => {
   bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
 })
+
+
+var r = '' ;
+console.log(r);
+var jsforce = require('jsforce');
+var conn = new jsforce.Connection();
+conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
+  console.log('in login');
+  if (err) { return console.error(err); }
+  conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
+    console.log('in query');
+    if (err) { return console.error(err); }
+    r = res.records[0].Name;
+    console.log(r);
+  });
+});
+console.log('hi');
 
 
 /*var respon1;
