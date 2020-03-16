@@ -4,7 +4,10 @@
     "description": "uvolte",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test script\" && exit 1"
+        "start": "node index.js"
+    },
+    "engines": {
+        "node":"10.15.2"
     },
     "author": "ya",
     "license": "VILEYKA CORP",
