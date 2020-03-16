@@ -6,7 +6,7 @@ const options = {
 const bot = new TelegramBot(TOKEN, options);
 
 bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${respon1}`);
+  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla`);
 })
 
 var respon1;
