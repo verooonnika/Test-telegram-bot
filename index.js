@@ -68,15 +68,10 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
         return console.error('err', err); 
       }
         bot.sendMessage(msg.chat.id, res.records[0].Name);
-      })
+      });
   
       });
 
-
-
-
-
-  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
 });
 
 
