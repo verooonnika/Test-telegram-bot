@@ -77,12 +77,6 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
 
 
 
-
-    
-});
-
-
-
 /*var respon1;
 var q = 'SELECT Id, Name, FROM Account LIMIT 1';
 
