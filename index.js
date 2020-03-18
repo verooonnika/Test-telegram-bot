@@ -64,10 +64,26 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
       "WHERE Email = '" + login + "' "  +
       "AND Password__c = '" + password + "' "  +
       "LIMIT 10", function (err, res) {
-        if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password: ');
+        if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
         return console.error('err', err); 
       }
-        bot.sendMessage(msg.chat.id, res.records[0].Name);
+       // bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!');
+
+        const opts = {
+          reply_to_message_id: msg.message_id,
+          reply_markup: JSON.stringify({
+            inline_keyboard: [
+              ['Текущий баланс'],
+              ['Создать карточку']
+            ]
+          })
+        };
+        bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts);
+
+
+
+
+
       });
   
       });
