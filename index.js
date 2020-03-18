@@ -52,16 +52,25 @@ bot.onText(/\/start/, function onEchoText(msg) {
 bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
 
   console.log(msg.text);
+  var login = msg.text;
 
   /*conn.query('SELECT Id, Name, Email FROM Contact WHERE Email = ' + msg.text + ' LIMIT 1', function(err, res){
     if (err) { return console.error('err', err); }
     result = res.records[0].Name;
   }); */
-  conn.sobject("Contact").select('Id, Name, Email').where(`Email =: ${msg.text} `).limit(1).execute(function(err, record){
+  conn.query(
+    "SELECT Id, Name, Email FROM Contact " +
+    "WHERE Email = '" + login + "' "  +
+    "LIMIT 200", function (err, record) {
+      if (err) {  bot.sendMessage(msg.chat.id, 'Error: ');
+      return console.error('err', err); }
+     bot.sendMessage(msg.chat.id, 'Логин ок: ' + record.Name);
+    });
+  /*conn.sobject("Contact").select('Id, Name, Email').where(`Email =: ${msg.text} `).limit(1).execute(function(err, record){
     if (err) {  bot.sendMessage(msg.chat.id, 'Error: ');
      return console.error('err', err); }
     bot.sendMessage(msg.chat.id, 'Логин ок: ' + record.Name);
-  });
+  }); */
   //bot.sendMessage(msg.chat.id, 'Логин ок: ' + result);
 });
 
