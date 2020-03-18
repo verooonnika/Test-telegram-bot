@@ -61,10 +61,10 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
   conn.query(
     "SELECT Id, Name, Email FROM Contact " +
     "WHERE Email = '" + login + "' "  +
-    "LIMIT 200", function (err, record) {
+    "LIMIT 200", function (err, res) {
       if (err) {  bot.sendMessage(msg.chat.id, 'Error: ');
       return console.error('err', err); }
-     bot.sendMessage(msg.chat.id, 'Логин ок: ' + record.Name);
+     bot.sendMessage(msg.chat.id, 'Логин ок: ' + res.records[0].Name);
     });
   /*conn.sobject("Contact").select('Id, Name, Email').where(`Email =: ${msg.text} `).limit(1).execute(function(err, record){
     if (err) {  bot.sendMessage(msg.chat.id, 'Error: ');
