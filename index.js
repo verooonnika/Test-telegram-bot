@@ -63,24 +63,17 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
       "SELECT Id, Name, Email FROM Contact " +
       "WHERE Email = '" + login + "' "  +
       "AND Password__c = '" + password + "' "  +
-      "LIMIT 10", function (err, res) {
+      "LIMIT 1", function (err, res) {
         if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
         return console.error('err', err); 
       }
-       // bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!');
-
-      /* const opts = {
-          reply_to_message_id: msg.message_id,
-          reply_markup: InlineKeyboardMarkup(
-               [InlineKeyboardButton("Текущий баланс", callback_data='1')],
-            [InlineKeyboardButton("Создать карточку", callback_data='2')])
-        };
-        bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts);  */
-
 
         const opts = {
           reply_markup: JSON.stringify({
-            keyboard: [[{"text":"Текущий баланс","callback_data":"1"},{"text":"Создать карточку","callback_data":"1"}]] 
+            inline_keyboard: [
+              [{"text":"Текущий баланс","callback_data":"1"}],
+              [{"text":"Создать карточку","callback_data":"1"}]
+            ] 
           })
         //  reply_markup: {
          //     resize_keyboard: true,
