@@ -79,11 +79,15 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
 
 
         const opts = {
-          reply_to_message_id: msg.message_id,
           reply_markup: {
               resize_keyboard: true,
               one_time_keyboard: true,
-              keyboard: [["opt 1"],["opt2"]]          }
+              //keyboard: [["opt 1"],["opt2"]]   
+              keyboard: InlineKeyboardMarkup(
+                [InlineKeyboardButton("Текущий баланс", callback_data='1')],
+             [InlineKeyboardButton("Создать карточку", callback_data='2')])   
+
+               }
       };
   
       bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
