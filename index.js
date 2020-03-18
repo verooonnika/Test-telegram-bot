@@ -53,7 +53,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
 
   console.log(msg.text);
   var login = msg.text;
-  bot.sendMessage(msg.chat.id, 'Введите пароль: ' + res.records[0].Name);
+  bot.sendMessage(msg.chat.id, 'Введите пароль: ');
 
   bot.on('message', msg => {
 
