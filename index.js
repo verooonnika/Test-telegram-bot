@@ -35,10 +35,18 @@ bot.onText(/\/name/, function onEchoText(msg) {
       if (err) { return console.error(err); }
       r = res.records[0].Name;
       console.log('sdkfjs');
-      console.log(res.records[0].msg.text);
     });
   });
   bot.sendMessage(msg.chat.id, r);
+});
+
+
+bot.onText(/\/start/, function onEchoText(msg) {
+  conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
+
+    if (err) { return console.error(err); }
+  });
+  bot.sendMessage(msg.chat.id, 'Введите логин: ');
 });
 
 
