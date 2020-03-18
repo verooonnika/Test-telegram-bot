@@ -50,7 +50,10 @@ bot.onText(/\/start/, function onEchoText(msg) {
 });
 
 bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
+
+  
   conn.query('SELECT Id, Name, Email FROM Contact WHERE Email = ' + msg.text + ' LIMIT 1', function(err, res){
+    if (err) { return console.error('err', err); }
     result = res.records[0].Name;
   });
   
