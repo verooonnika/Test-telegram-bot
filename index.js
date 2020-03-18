@@ -49,12 +49,12 @@ bot.onText(/\/start/, function onEchoText(msg) {
   bot.sendMessage(msg.chat.id, 'Введите логин: ');
 });
 
-bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(err, msg) {
-  if (err) {
-    bot.sendMessage(msg.chat.id, 'Неверный логин: ');
-     return console.error(err);
-     }
-  bot.sendMessage(msg.chat.id, 'Логин ок: ');
+bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
+  conn.query('SELECT Id, Name, Email FROM Contact WHERE Email = ' + msg.text + ' LIMIT 1', function(err, res){
+    result = res.records[0].Name;
+  });
+  
+  bot.sendMessage(msg.chat.id, 'Логин ок: ', + result);
 });
 
 
