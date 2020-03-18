@@ -72,7 +72,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
         const opts = {
           reply_to_message_id: msg.message_id,
           reply_markup: JSON.stringify({
-            inline_keyboard: [
+            keyboard: [
               ['Текущий баланс'],
               ['Создать карточку']
             ]
