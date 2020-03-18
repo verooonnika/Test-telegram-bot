@@ -50,17 +50,15 @@ bot.onText(/\/start/, function onEchoText(msg) {
 });
 
 bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
- /* conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
-    if (err) {
-      bot.sendMessage(msg.chat.id, 'Неверный: ');
-       return console.error(err);
-       }
-  }); */
-  conn.query('SELECT Id, Name, Email FROM Contact WHERE Email = ' + msg.text + ' LIMIT 1', function(err, res){
+
+  /*conn.query('SELECT Id, Name, Email FROM Contact WHERE Email = ' + msg.text + ' LIMIT 1', function(err, res){
     if (err) { return console.error('err', err); }
     result = res.records[0].Name;
+  }); */
+  conn.sobject("Contact").select('Id, Name, Email').where(`Email = ${msg.text} `).limit(1).execute(function(err, record){
+    bot.sendMessage(msg.chat.id, 'Логин ок: ' + record.Name);
   });
-  bot.sendMessage(msg.chat.id, 'Логин ок: ' + result);
+  //bot.sendMessage(msg.chat.id, 'Логин ок: ' + result);
 });
 
 
