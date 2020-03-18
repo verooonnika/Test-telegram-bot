@@ -84,8 +84,8 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
               one_time_keyboard: true,
               //keyboard: [["opt 1"],["opt2"]]   
               keyboard: InlineKeyboardMarkup(
-                [InlineKeyboardButton("Текущий баланс", callback_data='1')],
-             [InlineKeyboardButton("Создать карточку", callback_data='2')])   
+                [InlineKeyboardButton(text ="Текущий баланс", callback_data='1')],
+             [InlineKeyboardButton(text = "Создать карточку", callback_data='2')])   
 
                }
       };
