@@ -87,7 +87,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
 bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   var answer = callbackQuery.data;
   if(answer == 'new-card'){
-    bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?'); 
+    bot.sendMessage(callbackQuery.chat.id, 'На какой день желаете создать карточку?'); 
   }
   console.log(answer);
 
