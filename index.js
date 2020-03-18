@@ -78,16 +78,18 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
       };
   
       bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
-      bot.on('callback_query', function onCallbackQuery(callbackQuery) {
-        var answer = callbackQuery.data;
-        console.log(answer);
 
-      });
-  
       });
 
 });
 });
+
+bot.on('callback_query', function onCallbackQuery(callbackQuery) {
+  var answer = callbackQuery.data;
+  console.log(answer);
+
+});
+
 
 
 
