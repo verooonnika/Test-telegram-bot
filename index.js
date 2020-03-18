@@ -60,7 +60,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
     if (err) { return console.error('err', err); }
     result = res.records[0].Name;
   });
-  bot.sendMessage(msg.chat.id, 'Логин ок: ');
+  bot.sendMessage(msg.chat.id, 'Логин ок: ' + result);
 });
 
 
