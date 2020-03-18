@@ -50,12 +50,12 @@ bot.onText(/\/start/, function onEchoText(msg) {
 });
 
 bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
-  conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
+ /* conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
     if (err) {
       bot.sendMessage(msg.chat.id, 'Неверный: ');
        return console.error(err);
        }
-  });
+  }); */
   bot.sendMessage(msg.chat.id, 'Логин ок: ');
 });
 
