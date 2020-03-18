@@ -71,8 +71,8 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
         const opts = {
           reply_markup: JSON.stringify({
             inline_keyboard: [
-              [{"text":"Текущий баланс","callback_data":"1"},
-              {"text":"Создать карточку","callback_data":"1"}]
+              [{"text":"Текущий баланс","callback_data":"balance"},
+              {"text":"Создать карточку","callback_data":"new-card"}]
             ] 
           })
       };
@@ -86,6 +86,9 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
 
 bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   var answer = callbackQuery.data;
+  if(answer == 'new-card'){
+    bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?'); 
+  }
   console.log(answer);
 
 });
