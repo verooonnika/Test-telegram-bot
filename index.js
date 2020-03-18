@@ -49,6 +49,9 @@ bot.onText(/\/start/, function onEchoText(msg) {
   bot.sendMessage(msg.chat.id, 'Введите логин: ');
 });
 
+bot.on('message', msg => {
+  bot.sendMessage(msg.chat.id, `Hi, ${msg.from.first_name} bla bla`);
+});
 
 
 /*var respon1;
