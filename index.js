@@ -58,6 +58,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
     result = res.records[0].Name;
   }); */
   conn.sobject("Contact").select('Id, Name, Email').where(`Email = ${msg.text} `).limit(1).execute(function(err, record){
+    if (err) { return console.error('err', err); }
     bot.sendMessage(msg.chat.id, 'Логин ок: ' + record.Name);
   });
   //bot.sendMessage(msg.chat.id, 'Логин ок: ' + result);
