@@ -69,14 +69,24 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
       }
        // bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!');
 
-       const opts = {
+      /* const opts = {
           reply_to_message_id: msg.message_id,
           reply_markup: InlineKeyboardMarkup(
                [InlineKeyboardButton("Текущий баланс", callback_data='1')],
             [InlineKeyboardButton("Создать карточку", callback_data='2')])
         };
-        bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
+        bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts);  */
 
+
+        const opts = {
+          reply_to_message_id: msg.message_id,
+          reply_markup: {
+              resize_keyboard: true,
+              one_time_keyboard: true,
+              keyboard: [["opt 1"],["opt2"]]          }
+      };
+  
+      bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
 
       });
   
