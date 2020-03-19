@@ -92,14 +92,23 @@ bot.on('callback_query', callbackQuery => {
     const opts = {
       reply_markup: JSON.stringify({
         inline_keyboard: [
-          [{"text":"Сегодня","callback_data":"balance"},
-          {"text":"Календарь","callback_data":"new-card"},
-          {"text":"Отмена","callback_data":"balance"}]
+          [{"text":"Сегодня","callback_data":"today"},
+          {"text":"Календарь","callback_data":"calendar"},
+          {"text":"Отмена","callback_data":"cancel"}]
         ] 
       })
   };
 
   bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?', opts); 
+
+  bot.on('callback_query', callbackQuery => {
+    var answer = callbackQuery.data;
+    if(answer == 'today'){
+      console.log(answer);
+
+    }
+
+  })
   }
   else{
   }
