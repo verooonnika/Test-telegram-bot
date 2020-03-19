@@ -49,7 +49,7 @@ bot.onText(/\/start/, function onEchoText(msg) {
   bot.sendMessage(msg.chat.id, 'Введите логин: ');
 });
 
-bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
+bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
 
   console.log(msg.text);
   var login = msg.text;
