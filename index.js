@@ -85,16 +85,14 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(
 });
 
 bot.on('callback_query', callbackQuery => {
-  console.log(callbackQuery.data);
   var answer = callbackQuery.data;
+  const msg = callbackQuery.message;
   if(answer == 'new-card'){
-    console.log('right');
-    bot.sendMessage(callbackQuery.chat.id, 'На какой день желаете создать карточку?'); 
+    bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?'); 
   }
   else{
-    console.log('wrong answer');
   }
-  console.log(answer);
+
 
 });
 
