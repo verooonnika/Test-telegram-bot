@@ -88,6 +88,29 @@ bot.on('callback_query', callbackQuery => {
   var answer = callbackQuery.data;
   const msg = callbackQuery.message;
   if(answer == 'new-card'){
+    
+    const opts = {
+      reply_markup: JSON.stringify({
+        inline_keyboard: [
+          [{"text":"Сегодня","callback_data":"balance"},
+          {"text":"Календарь","callback_data":"new-card"},
+          {"text":"Отмена","callback_data":"balance"}]
+        ] 
+      })
+  };
+
+  bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?', opts); 
+  }
+  else{
+  }
+
+
+});
+
+bot.on('callback_query', callbackQuery => {
+  var answer = callbackQuery.data;
+  const msg = callbackQuery.message;
+  if(answer == 'new-card'){
     bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?'); 
   }
   else{
@@ -95,6 +118,7 @@ bot.on('callback_query', callbackQuery => {
 
 
 });
+
 
 
 
