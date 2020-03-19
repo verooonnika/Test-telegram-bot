@@ -90,6 +90,9 @@ bot.on('callback_query', callbackQuery => {
   if(answer == 'new-card'){
     bot.sendMessage(callbackQuery.chat.id, 'На какой день желаете создать карточку?'); 
   }
+  else{
+    console.log('wrong answer');
+  }
   console.log(answer);
 
 });
