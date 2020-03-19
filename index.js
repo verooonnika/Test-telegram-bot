@@ -49,7 +49,7 @@ bot.onText(/\/start/, function onEchoText(msg) {
   bot.sendMessage(msg.chat.id, 'Введите логин: ');
 });
 
-bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
+bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
 
   console.log(msg.text);
   var login = msg.text;
@@ -79,18 +79,18 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
   
       bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
 
-      bot.on('callback_query', callbackQuery =>  {
-        var answer = callbackQuery.data;
-        if(answer == 'new-card'){
-          bot.sendMessage(callbackQuery.chat.id, 'На какой день желаете создать карточку?'); 
-        }
-        console.log(answer);
-      
-      });
-
       });
 
 });
+});
+
+bot.on('callback_query', callbackQuery => {
+  var answer = callbackQuery.data;
+  if(answer == 'new-card'){
+    bot.sendMessage(callbackQuery.chat.id, 'На какой день желаете создать карточку?'); 
+  }
+  console.log(answer);
+
 });
 
 
