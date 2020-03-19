@@ -88,7 +88,7 @@ bot.on('callback_query', callbackQuery => {
   var answer = callbackQuery.data;
   const msg = callbackQuery.message;
   if(answer == 'new-card'){
-    
+
     const opts = {
       reply_markup: JSON.stringify({
         inline_keyboard: [
@@ -100,18 +100,6 @@ bot.on('callback_query', callbackQuery => {
   };
 
   bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?', opts); 
-  }
-  else{
-  }
-
-
-});
-
-bot.on('callback_query', callbackQuery => {
-  var answer = callbackQuery.data;
-  const msg = callbackQuery.message;
-  if(answer == 'new-card'){
-    bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?'); 
   }
   else{
   }
