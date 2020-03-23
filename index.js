@@ -66,7 +66,7 @@ bot.onText(/\/start/, function onEchoText(msg) {
               return console.error('err', err); 
             } else { 
               console.log(res.records[0].Id);
-            bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', res.records[0].Id); 
+            bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!' + res.records[0].Id); 
             }
           });
 
