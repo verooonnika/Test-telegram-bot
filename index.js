@@ -112,6 +112,8 @@ bot.on('callback_query', callbackQuery => {
   bot.on('callback_query', callbackQuery => {
     var answer = callbackQuery.data;
     var cardDate;
+    var amount;
+    var description;
     if(answer == 'today'){
       console.log(answer);
       cardDate = new Date('2020-03-19');
@@ -124,10 +126,24 @@ bot.on('callback_query', callbackQuery => {
     }
     console.log(contactId);
     console.log(cardDate);
+
+
+    bot.sendMessage(msg.chat.id, 'Введите сумму: ');
+    bot.on('message', msg => {
+      amount = msg.text;
+    });
+    bot.sendMessage(msg.chat.id, 'Введите описание: ');
+    bot.on('message', msg => {
+      description = msg.text;
+    });
+
+
     conn.sobject("Expense_Card__c").create({ 
       Card_Keeper__c : contactId,
-      Card_Date__c : cardDate
-      //Amount__c : '10'
+      Card_Date__c : cardDate,
+      Amount__c : amount,
+      Description__c : description
+
     }, function(err, ret) {
       if (err || !ret.success) { return console.error(err, ret); }
       console.log("Created record id : " + ret.id);
