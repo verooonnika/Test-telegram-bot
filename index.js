@@ -27,8 +27,15 @@ bot.onText(/\/start/, function onEchoText(msg) {
 
 bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
 
+  console.log(msg.text);
+  var login = msg.text;
+  bot.sendMessage(msg.chat.id, 'Введите пароль: ');
 
-
+  bot.on('message', msg => {
+    var password = msg.text;
+    contactId = trylogin(login, password);
+  }).then(  bot.sendMessage(msg.chat.id, 'Введите пароль: ' + contactId))
+/*
   console.log(msg.text);
   var login = msg.text;
   bot.sendMessage(msg.chat.id, 'Введите пароль: ');
@@ -37,6 +44,8 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
 
     var password = msg.text;
 
+    trylogin(login, password);
+
     conn.query(
       "SELECT Id, Name, Email FROM Contact " +
       "WHERE Email = '" + login + "' "  +
@@ -44,7 +53,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
       "LIMIT 1", function (err, res) {
         if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
         return console.error('err', err); 
-      }
+      } 
 
       contactId = res.records[0].Id;
 
@@ -62,7 +71,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
 
       });
 
-});
+}); */
 });
 
 bot.on('callback_query', callbackQuery => {
@@ -136,6 +145,21 @@ bot.on('callback_query', callbackQuery => {
 
 function sayhi(msg){
   bot.sendMessage(msg.chat.id, 'hi ');
+}
+
+function trylogin(login, password){
+  conn.query(
+    "SELECT Id, Name, Email FROM Contact " +
+    "WHERE Email = '" + login + "' "  +
+    "AND Password__c = '" + password + "' "  +
+    "LIMIT 1", function (err, res) {
+      if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
+      return console.error('err', err); 
+    }
+
+    contactId = res.records[0].Id;
+    return contactId;
+  })
 }
 
 
