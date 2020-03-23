@@ -148,6 +148,7 @@ function sayhi(msg){
 }
 
 function trylogin(login, password){
+  console.log('in trylogin' + login + password);
   conn.query(
     "SELECT Id, Name, Email FROM Contact " +
     "WHERE Email = '" + login + "' "  +
@@ -158,6 +159,7 @@ function trylogin(login, password){
     }
 
     contactId = res.records[0].Id;
+    console.log('contactId' + contactId);
     return contactId;
   })
 }
