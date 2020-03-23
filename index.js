@@ -106,6 +106,10 @@ bot.on('callback_query', callbackQuery => {
       bot.sendMessage(msg.chat.id, 'Введите описание: ')
       bot.on('message', msg => {
         description = msg.text;
+        console.log(amount);
+        console.log(description);
+
+        
         conn.sobject("Expense_Card__c").create({ 
           Card_Keeper__c : contactId,
           Card_Date__c : cardDate,
