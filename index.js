@@ -58,6 +58,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
       };
   
       bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
+      sayhi(msg);
 
       });
 
@@ -132,6 +133,10 @@ bot.on('callback_query', callbackQuery => {
 
 });
 
+
+function sayhi(msg){
+  bot.sendMessage(msg.chat.id, 'hi ');
+}
 
 
 
