@@ -103,25 +103,24 @@ bot.on('callback_query', callbackQuery => {
     bot.sendMessage(msg.chat.id, 'Введите сумму: ');
     bot.on('message', msg => {
       amount = msg.text;
-    }).then( bot.sendMessage(msg.chat.id, 'Введите описание: '))
-    bot.on('message', msg => {
-      description = msg.text;
-    }).then( 
-      conn.sobject("Expense_Card__c").create({ 
-      Card_Keeper__c : contactId,
-      Card_Date__c : cardDate,
-      Amount__c : amount,
-      Description__c : description
+      bot.sendMessage(msg.chat.id, 'Введите описание: ')
+      bot.on('message', msg => {
+        description = msg.text;
+        conn.sobject("Expense_Card__c").create({ 
+          Card_Keeper__c : contactId,
+          Card_Date__c : cardDate,
+          Amount__c : amount,
+          Description__c : description
+    
+        }, function(err, ret) {
+          if (err || !ret.success) { return console.error(err, ret); }
+          console.log("Created record id : " + ret.id + ret.Amount__c + ret.Description__c);
+          // ...
+        })
+      })
+    })
 
-    }, function(err, ret) {
-      if (err || !ret.success) { return console.error(err, ret); }
-      console.log("Created record id : " + ret.id + ret.Amount__c + ret.Description__c);
-      // ...
-    }))
 
-   
-
-;
   })
   }
 
