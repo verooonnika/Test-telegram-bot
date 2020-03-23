@@ -50,6 +50,7 @@ bot.onText(/\/start/, function onEchoText(msg) {
   });
   bot.sendMessage(msg.chat.id, 'Введите логин: ').then(msg => {
     bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
+      var login = msg.text;
       bot.sendMessage(msg.chat.id, 'Введите пароль: ').then(msg => {
         bot.on('message', msg => {
           var password = msg.text;
