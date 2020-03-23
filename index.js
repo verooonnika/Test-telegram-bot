@@ -54,6 +54,8 @@ bot.onText(/\/start/, function onEchoText(msg) {
       bot.sendMessage(msg.chat.id, 'Введите пароль: ').then(msg => {
         bot.on('message', msg => {
           var password = msg.text;
+          console.log('login', login);
+          console.log('password', password);
           conn.query(
             "SELECT Id, Name, Email FROM Contact " +
             "WHERE Email = '" + login + "' "  +
