@@ -118,7 +118,7 @@ bot.on('callback_query', callbackQuery => {
     conn.sobject("Expense_Card__c").create({ 
       Card_Keeper__c : contactId,
       Card_Date__c : cardDate,
-      Amount__c : 0
+      Amount__c : 10
     }, function(err, ret) {
       if (err || !ret.success) { return console.error(err, ret); }
       console.log("Created record id : " + ret.id);
