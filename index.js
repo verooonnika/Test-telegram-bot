@@ -7,9 +7,9 @@ const bot = new TelegramBot(TOKEN, options);
 
 
 
-
-
 var r = '' ;
+
+var contactId = '';
 
 var jsforce = require('jsforce');
 var conn = new jsforce.Connection();
@@ -34,6 +34,7 @@ bot.onText(/\/name/, function onEchoText(msg) {
     conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
       if (err) { return console.error(err); }
       r = res.records[0].Name;
+      contactId = res.records[0].Id;
       console.log('sdkfjs');
     });
   });
@@ -88,7 +89,7 @@ bot.on('callback_query', callbackQuery => {
   var answer = callbackQuery.data;
   const msg = callbackQuery.message;
   if(answer == 'new-card'){
-
+ console.log(answer);
     const opts = {
       reply_markup: JSON.stringify({
         inline_keyboard: [
@@ -103,14 +104,27 @@ bot.on('callback_query', callbackQuery => {
 
   bot.on('callback_query', callbackQuery => {
     var answer = callbackQuery.data;
+    var cardDate;
     if(answer == 'today'){
+      console.log(answer);
+      cardDate = new Date('2020-03-19');
+    } else if(answer == 'calendar'){
+      console.log(answer);
+
+    } else if(answer == 'cancel'){
       console.log(answer);
 
     }
-
+    conn.sobject("Expense_Card__c").create({ 
+      Card_Keeper__c : contactId,
+      Card_Date__c : cardDate,
+      Amount__c : 0
+    }, function(err, ret) {
+      if (err || !ret.success) { return console.error(err, ret); }
+      console.log("Created record id : " + ret.id);
+      // ...
+    });
   })
-  }
-  else{
   }
 
 
