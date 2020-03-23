@@ -50,54 +50,10 @@ bot.onText(/\/start/, function onEchoText(msg) {
 
     if (err) { return console.error(err); }
   });
-  bot.sendMessage(msg.chat.id, 'Введите логин: ').then( msg => {
-    bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
-      login = msg.text;
-    })
-  }).then( bot.sendMessage(msg.chat.id, 'Введите пароль: ')).then(msg =>{
-    bot.on('message', msg => {
-      password = msg.text;
-      console.log('login', login);
-      console.log('password', password);
-    })
-  }).then(conn.query(
-            "SELECT Id, Name, Email FROM Contact " +
-            "WHERE Email = '" + login + "' "  +
-            "AND Password__c = '" + password + "' "  +
-            "LIMIT 1", function (err, res) {
-              if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
-              return console.error('err', err); 
-            } else { 
-              console.log(res.records[0].Id);
-            bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!' + res.records[0].Id); 
-            }
-          }))
-    
-    /*  bot.sendMessage(msg.chat.id, 'Введите пароль: ').then(msg => {
-        bot.on('message', msg => {
-          password = msg.text;
-          console.log('login', login);
-          console.log('password', password);
-          conn.query(
-            "SELECT Id, Name, Email FROM Contact " +
-            "WHERE Email = '" + login + "' "  +
-            "AND Password__c = '" + password + "' "  +
-            "LIMIT 1", function (err, res) {
-              if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
-              return console.error('err', err); 
-            } else { 
-              console.log(res.records[0].Id);
-            bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!' + res.records[0].Id); 
-            }
-          });
-
-        })
-      })
-    })
-  }); */
+  bot.sendMessage(msg.chat.id, 'Введите логин: ');
 });
 
-/*bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
+bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
 
   console.log(msg.text);
   var login = msg.text;
@@ -179,7 +135,6 @@ bot.on('callback_query', callbackQuery => {
 
 });
 
-*/
 
 
 
