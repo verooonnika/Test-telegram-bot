@@ -61,7 +61,11 @@ bot.onText(/\/start/, function onEchoText(msg) {
               if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
               return console.error('err', err); 
             } 
-            bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно! ',  res.records[0].Id)
+            bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', res.records[0].Id); 
+          });
+
+
+
         })
       })
     })
