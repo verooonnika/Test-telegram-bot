@@ -13,39 +13,11 @@ var contactId = '';
 
 var jsforce = require('jsforce');
 var conn = new jsforce.Connection();
-/*
-conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
 
-  if (err) { return console.error(err); }
-  conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
-    if (err) { return console.error(err); }
-    r = res.records[0].Name;
-  });
-}); */
-
-/*bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, `Veronika klubnika ${msg.from.first_name} bla bla ${r}`);
-});*/
-
-// Matches /echo [whatever]
-/*bot.onText(/\/name/, function onEchoText(msg) {
-  conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
-
-    if (err) { return console.error(err); }
-    conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
-      if (err) { return console.error(err); }
-      r = res.records[0].Name;
-      contactId = res.records[0].Id;
-      console.log('sdkfjs');
-    });
-  });
-  bot.sendMessage(msg.chat.id, r);
-}); */
 
 
 bot.onText(/\/start/, function onEchoText(msg) {
-  var login = '';
-  var password = '';
+
   conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
 
     if (err) { return console.error(err); }
@@ -134,12 +106,8 @@ bot.on('callback_query', callbackQuery => {
     }).then( bot.sendMessage(msg.chat.id, 'Введите описание: '))
     bot.on('message', msg => {
       description = msg.text;
-    });
-
-    console.log(amount);
-    console.log(description);
-
-    conn.sobject("Expense_Card__c").create({ 
+    }).then( 
+      conn.sobject("Expense_Card__c").create({ 
       Card_Keeper__c : contactId,
       Card_Date__c : cardDate,
       Amount__c : amount,
@@ -147,9 +115,13 @@ bot.on('callback_query', callbackQuery => {
 
     }, function(err, ret) {
       if (err || !ret.success) { return console.error(err, ret); }
-      console.log("Created record id : " + ret.id);
+      console.log("Created record id : " + ret.id + ret.Amount__c + ret.Description__c);
       // ...
-    });
+    }))
+
+   
+
+;
   })
   }
 
