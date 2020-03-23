@@ -115,6 +115,8 @@ bot.on('callback_query', callbackQuery => {
       console.log(answer);
 
     }
+    console.log(contactId);
+    console.log(cardDate);
     conn.sobject("Expense_Card__c").create({ 
       Card_Keeper__c : contactId,
       Card_Date__c : cardDate
