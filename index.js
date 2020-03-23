@@ -47,10 +47,10 @@ bot.onText(/\/start/, function onEchoText(msg) {
   conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
 
     if (err) { return console.error(err); }
-  }).then(msg => {
-    bot.sendMessage(msg.chat.id, 'Введите логин: ');
   });
-
+  bot.sendMessage(msg.chat.id, 'Введите логин: ').then(msg => {
+    bot.sendMessage(msg.chat.id, 'test ')
+  });
 });
 
 bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
