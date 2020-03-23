@@ -49,7 +49,7 @@ bot.onText(/\/start/, function onEchoText(msg) {
 
     if (err) { return console.error(err); }
   });
-  bot.sendMessage(msg.chat.id, 'Введите логин: ').then(
+  bot.sendMessage(msg.chat.id, 'Введите логин: ').then( msg => {
     bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
       login = msg.text;
       bot.sendMessage(msg.chat.id, 'Введите пароль: ').then(msg => {
@@ -73,7 +73,7 @@ bot.onText(/\/start/, function onEchoText(msg) {
         })
       })
     })
-  );
+  });
 });
 
 /*bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
