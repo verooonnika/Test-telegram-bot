@@ -49,11 +49,13 @@ bot.onText(/\/start/, function onEchoText(msg) {
     if (err) { return console.error(err); }
   });
   bot.sendMessage(msg.chat.id, 'Введите логин: ').then(msg => {
-    bot.sendMessage(msg.chat.id, 'test ')
+    bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
+      bot.sendMessage('Введите пароль: ')
+    })
   });
 });
 
-bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
+/*bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
 
   console.log(msg.text);
   var login = msg.text;
@@ -135,7 +137,7 @@ bot.on('callback_query', callbackQuery => {
 
 });
 
-
+*/
 
 
 
