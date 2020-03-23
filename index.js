@@ -131,11 +131,11 @@ bot.on('callback_query', callbackQuery => {
     bot.sendMessage(msg.chat.id, 'Введите сумму: ');
     bot.on('message', msg => {
       amount = msg.text;
-    });
-    bot.sendMessage(msg.chat.id, 'Введите описание: ');
+    }).then( bot.sendMessage(msg.chat.id, 'Введите описание: ');
     bot.on('message', msg => {
       description = msg.text;
-    });
+    })
+   
 
 
     conn.sobject("Expense_Card__c").create({ 
