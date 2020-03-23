@@ -103,9 +103,10 @@ bot.on('callback_query', callbackQuery => {
     bot.sendMessage(msg.chat.id, 'Введите сумму: ');
     bot.on('message', msg => {
       amount = msg.text; 
+      console.log(amount);
       bot.sendMessage(msg.chat.id, 'Введите описание: ');
-      bot.on('message', ms => {
-        description = ms.text;
+      bot.on('message', msg => {
+        description = msg.text;
         console.log(amount);
         console.log(description);
 
