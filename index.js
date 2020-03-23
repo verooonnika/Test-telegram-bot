@@ -5,10 +5,6 @@ const options = {
 };
 const bot = new TelegramBot(TOKEN, options);
 
-
-
-var r = '' ;
-
 var contactId = '';
 
 var jsforce = require('jsforce');
@@ -33,7 +29,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
 
   bot.on('message', msg => {
     var password = msg.text;
-    contactId = trylogin(login, password);
+    contactId = trylogin(msg, login, password);
   }).then(  bot.sendMessage(msg.chat.id, 'Введите пароль: ' + contactId))
 /*
   console.log(msg.text);
@@ -142,12 +138,7 @@ bot.on('callback_query', callbackQuery => {
 
 });
 
-
-function sayhi(msg){
-  bot.sendMessage(msg.chat.id, 'hi ');
-}
-
-function trylogin(login, password){
+function trylogin(msg, login, password){
   console.log('in trylogin' + login + password);
   conn.query(
     "SELECT Id, Name, Email FROM Contact " +
