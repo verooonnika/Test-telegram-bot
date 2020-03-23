@@ -102,8 +102,8 @@ bot.on('callback_query', callbackQuery => {
 
     bot.sendMessage(msg.chat.id, 'Введите сумму: ');
     bot.on('message', msg => {
-      amount = msg.text; }).then( msg => {
-      bot.sendMessage(msg.chat.id, 'Введите описание: ')
+      amount = msg.text; }).then(
+      bot.sendMessage(msg.chat.id, 'Введите описание: '))
       bot.on('message', msg => {
         description = msg.text;
         console.log(amount);
@@ -122,7 +122,7 @@ bot.on('callback_query', callbackQuery => {
           // ...
         })
       })
-     } )
+      
 
 
   })
@@ -130,6 +130,11 @@ bot.on('callback_query', callbackQuery => {
 
 
 });
+
+function hi(){
+  console.log('hiiiiiiiii');
+
+}
 
 
 
