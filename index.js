@@ -44,13 +44,14 @@ conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
 
 
 bot.onText(/\/start/, function onEchoText(msg) {
+  var login = '';
   conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
 
     if (err) { return console.error(err); }
   });
-  bot.sendMessage(msg.chat.id, 'Введите логин: ').then(msg => {
+  bot.sendMessage(msg.chat.id, 'Введите логин: ').then(
     bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
-      var login = msg.text;
+      login = msg.text;
       bot.sendMessage(msg.chat.id, 'Введите пароль: ').then(msg => {
         bot.on('message', msg => {
           var password = msg.text;
@@ -72,7 +73,7 @@ bot.onText(/\/start/, function onEchoText(msg) {
         })
       })
     })
-  });
+  );
 });
 
 /*bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, function onEchoText(msg) {
