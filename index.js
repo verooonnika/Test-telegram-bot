@@ -50,7 +50,20 @@ bot.onText(/\/start/, function onEchoText(msg) {
   });
   bot.sendMessage(msg.chat.id, 'Введите логин: ').then(msg => {
     bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
-      bot.sendMessage(msg.chat.id, 'Введите пароль: ')
+      bot.sendMessage(msg.chat.id, 'Введите пароль: ').then(msg => {
+        bot.on('message', msg => {
+          var password = msg.text;
+          conn.query(
+            "SELECT Id, Name, Email FROM Contact " +
+            "WHERE Email = '" + login + "' "  +
+            "AND Password__c = '" + password + "' "  +
+            "LIMIT 1", function (err, res) {
+              if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
+              return console.error('err', err); 
+            } 
+            bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно! ',  res.records[0].Id)
+        })
+      })
     })
   });
 });
