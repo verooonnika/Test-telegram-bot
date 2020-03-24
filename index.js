@@ -30,10 +30,21 @@ bot.onText(/\/start/, msg => {
               if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
               return console.error('err', err); 
             }
-        
             contactId = res.records[0].Id;
             console.log('contactId' + contactId);
-            return contactId;
+
+            const opts = {
+              reply_markup: JSON.stringify({
+                inline_keyboard: [
+                  [{"text":"Текущий баланс","callback_data":"balance"},
+                  {"text":"Создать карточку","callback_data":"new-card"}]
+                ] 
+              })
+          };
+      
+          bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
+
+           // return contactId;
           })
         })
 
