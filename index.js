@@ -60,9 +60,31 @@ bot.onText(/\/start/, msg => {
             };
             bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?', opts); 
 
+            bot.on('callback_query', callbackQuery => {
+              var answer = callbackQuery.data;
+              var cardDate;
+              var amount;
+              var description;
+              if(answer == 'today'){
+                console.log(answer);
+                cardDate = new Date('2020-03-19');
+              } else if(answer == 'calendar'){
+                console.log(answer);
+          
+              } else if(answer == 'cancel'){
+                console.log(answer);
+          
+              }
+              console.log(contactId);
+              console.log(cardDate);
+
+            })
+
             } else if (answer == 'balance'){
               console.log(answer);
             }
+
+            bot.sendMessage(msg.chat.id, 'Введите сумму: ');
           })
            // return contactId;
           })
