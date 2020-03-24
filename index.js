@@ -78,13 +78,15 @@ bot.onText(/\/start/, msg => {
               console.log(contactId);
               console.log(cardDate);
 
+
+            bot.sendMessage(msg.chat.id, 'Введите сумму: ');
+
             })
 
             } else if (answer == 'balance'){
               console.log(answer);
             }
 
-            bot.sendMessage(msg.chat.id, 'Введите сумму: ');
           })
            // return contactId;
           })
