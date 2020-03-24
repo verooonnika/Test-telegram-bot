@@ -80,6 +80,15 @@ bot.onText(/\/start/, msg => {
 
 
             bot.sendMessage(msg.chat.id, 'Введите сумму: ');
+            bot.on('message', msg => {
+              amount = msg.text; 
+              bot.sendMessage(msg.chat.id, 'Введите сумму: ');
+              bot.on('message', msg => {
+                description = msg.text
+                bot.sendMessage(msg.chat.id, 'Вы ввели: ' + amount + description);
+              })
+
+            })
 
             })
 
