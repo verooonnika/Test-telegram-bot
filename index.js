@@ -44,6 +44,26 @@ bot.onText(/\/start/, msg => {
       
           bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
 
+          bot.on('callback_query', callbackQuery => {
+            var answer = callbackQuery.data;
+            const msg = callbackQuery.message;
+            console.log(answer);
+            if(answer == 'new-card'){
+              const opts = {
+                reply_markup: JSON.stringify({
+                  inline_keyboard: [
+                    [{"text":"Сегодня","callback_data":"today"},
+                    {"text":"Календарь","callback_data":"calendar"},
+                    {"text":"Отмена","callback_data":"cancel"}]
+                  ] 
+                })
+            };
+            bot.sendMessage(msg.chat.id, 'На какой день желаете создать карточку?', opts); 
+
+            } else if (answer == 'balance'){
+              console.log(answer);
+            }
+          })
            // return contactId;
           })
         })
@@ -53,64 +73,6 @@ bot.onText(/\/start/, msg => {
     }
   });
 })
-
-/*bot.onText(/\/start/, function onEchoText(msg) {
-
-  conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
-
-    if (err) { return console.error(err); }
-  });
-  bot.sendMessage(msg.chat.id, 'Введите логин: ');
-});
-
-bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
-
-  console.log(msg.text);
-  var login = msg.text;
-  bot.sendMessage(msg.chat.id, 'Введите пароль: ');
-
-  bot.on('message', msg => {
-    var password = msg.text;
-    contactId = trylogin(msg, login, password);
-  }).then(  bot.sendMessage(msg.chat.id, 'Введите пароль: ' + contactId)) */
-/*
-  console.log(msg.text);
-  var login = msg.text;
-  bot.sendMessage(msg.chat.id, 'Введите пароль: ');
-
-  bot.on('message', msg => {
-
-    var password = msg.text;
-
-    trylogin(login, password);
-
-    conn.query(
-      "SELECT Id, Name, Email FROM Contact " +
-      "WHERE Email = '" + login + "' "  +
-      "AND Password__c = '" + password + "' "  +
-      "LIMIT 1", function (err, res) {
-        if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
-        return console.error('err', err); 
-      } 
-
-      contactId = res.records[0].Id;
-
-        const opts = {
-          reply_markup: JSON.stringify({
-            inline_keyboard: [
-              [{"text":"Текущий баланс","callback_data":"balance"},
-              {"text":"Создать карточку","callback_data":"new-card"}]
-            ] 
-          })
-      };
-  
-      bot.sendMessage(msg.chat.id, 'Авторизация прошла успешно!', opts); 
-      sayhi(msg);
-
-      });
-
-}); */
-//});
 
 /*bot.on('callback_query', callbackQuery => {
   var answer = callbackQuery.data;
@@ -197,8 +159,8 @@ function trylogin(msg, login, password){
   })
 }
 
-*/
 
+*/
 
 /*var respon1;
 var q = 'SELECT Id, Name, FROM Account LIMIT 1';
