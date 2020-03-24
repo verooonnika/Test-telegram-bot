@@ -78,15 +78,21 @@ bot.onText(/\/start/, msg => {
               console.log(contactId);
               console.log(cardDate);
 
-
+              var fl = 0;
+              fl = 1;
             bot.sendMessage(msg.chat.id, 'Введите сумму: ');
             bot.on('message', msg => {
               amount = msg.text; 
-              bot.sendMessage(msg.chat.id, 'Введите сумму: ');
-              bot.on('message', msg => {
-                description = msg.text
-                bot.sendMessage(msg.chat.id, 'Вы ввели: ' + amount + description);
-              })
+             
+              if(fl == 1){
+                bot.sendMessage(msg.chat.id, 'Введите описание: ');
+                bot.on('message', msg => {
+                  description = msg.text
+                  bot.sendMessage(msg.chat.id, 'Вы ввели: ' + amount + description);
+                  fl = 2;                
+                })
+              }
+
 
             })
 
