@@ -17,7 +17,26 @@ bot.onText(/\/start/, msg => {
     else {
       bot.sendMessage(msg.chat.id, 'Введите логин: ');
       bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
-        console.log('hiiii');
+        var login = msg.text;
+        console.log(login);
+        bot.sendMessage(msg.chat.id, 'Введите пароль: ');
+        bot.on('message', msg =>{
+          var password = msg.text;
+          conn.query(
+            "SELECT Id, Name, Email FROM Contact " +
+            "WHERE Email = '" + login + "' "  +
+            "AND Password__c = '" + password + "' "  +
+            "LIMIT 1", function (err, res) {
+              if (err) {  bot.sendMessage(msg.chat.id, 'Invalid login or password ');
+              return console.error('err', err); 
+            }
+        
+            contactId = res.records[0].Id;
+            console.log('contactId' + contactId);
+            return contactId;
+          })
+        })
+
 
       })
     }
