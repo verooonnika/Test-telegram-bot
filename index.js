@@ -10,9 +10,21 @@ var contactId = '';
 var jsforce = require('jsforce');
 var conn = new jsforce.Connection();
 
+bot.onText(/\/start/, msg => {
+  conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
 
+    if (err) { return console.error(err); }
+    else {
+      bot.sendMessage(msg.chat.id, 'Введите логин: ');
+      bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
+        console.log('hiiii');
 
-bot.onText(/\/start/, function onEchoText(msg) {
+      })
+    }
+  });
+})
+
+/*bot.onText(/\/start/, function onEchoText(msg) {
 
   conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
 
@@ -30,7 +42,7 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
   bot.on('message', msg => {
     var password = msg.text;
     contactId = trylogin(msg, login, password);
-  }).then(  bot.sendMessage(msg.chat.id, 'Введите пароль: ' + contactId))
+  }).then(  bot.sendMessage(msg.chat.id, 'Введите пароль: ' + contactId)) */
 /*
   console.log(msg.text);
   var login = msg.text;
@@ -68,9 +80,9 @@ bot.onText(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, msg => {
       });
 
 }); */
-});
+//});
 
-bot.on('callback_query', callbackQuery => {
+/*bot.on('callback_query', callbackQuery => {
   var answer = callbackQuery.data;
   const msg = callbackQuery.message;
   if(answer == 'new-card'){
@@ -155,7 +167,7 @@ function trylogin(msg, login, password){
   })
 }
 
-
+*/
 
 
 /*var respon1;
