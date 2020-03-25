@@ -1,9 +1,15 @@
 const TOKEN = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
-const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require('node-telegram-bot-api'),
+port = process.env.PORT || 443,
+host = '0.0.0.0',
+externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://test-git-bot-1488-228-1337.herokuapp.com',
+//token = process.env.TOKEN,
+bot = new TelegramBot(TOKEN, { webHook: { port : port, host : host } });
+bot.setWebHook(externalUrl + ':443/bot' + TOKEN);
 const options = {
   polling: true
 };
-const bot = new TelegramBot(TOKEN, options);
+//const bot = new TelegramBot(TOKEN, options);
 
 var contactId = '';
 
