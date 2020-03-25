@@ -1,4 +1,3 @@
-//const TOKEN = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
 const TelegramBot = require('node-telegram-bot-api'),
 port = process.env.PORT || 443,
 host = '0.0.0.0',
@@ -6,8 +5,6 @@ externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://test-git-bot-1488-228-
 token = process.env.TOKEN,
 bot = new TelegramBot(token, { webHook: { port : port, host : host } });
 bot.setWebHook(externalUrl + ':443/bot' + token);
-
-//const bot = new TelegramBot(TOKEN, options);
 
 var contactId = '';
 
@@ -37,6 +34,8 @@ var passwordSF = process.env.SF_ORG_PASSWORD;
 
 
 bot.onText(/\/start/, msg => {
+
+  previousMessage = '';
 
   conn.login(loginSF, passwordSF, function(err, res) {
 
@@ -140,7 +139,7 @@ bot.on('message', msg => {
       }
       console.log(res);
       if(res.records.length == 0){
-        bot.sendMessage(msg.chat.id, 'Invalid login or password ');
+        bot.sendMessage(msg.chat.id, 'Invalid login or password ').then(previousMessage = '');
         bot.sendMessage(msg.chat.id, 'Введите логин: ').then(previousMessage = 'login');
       }
 
