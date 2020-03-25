@@ -6,7 +6,7 @@ externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://test-git-bot-1488-228-
 token = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
 //bot = new TelegramBot(token, { webHook: { port : port, host : host } });
 bot = new TelegramBot(token, {polling: true});
-bot.setWebHook(externalUrl + ':443/bot' + token);
+//bot.setWebHook(externalUrl + ':443/bot' + token);
 
 var contactId = '';
 
