@@ -2,7 +2,8 @@ const TelegramBot = require('node-telegram-bot-api'),
 port = process.env.PORT || 443,
 host = '0.0.0.0',
 externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://test-git-bot-1488-228-1337.herokuapp.com',
-token = process.env.TOKEN,
+//token = process.env.TOKEN,
+token = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
 //bot = new TelegramBot(token, { webHook: { port : port, host : host } });
 bot = new TelegramBot(token, {polling: true});
 bot.setWebHook(externalUrl + ':443/bot' + token);
