@@ -1,14 +1,12 @@
-const TOKEN = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
+//const TOKEN = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
 const TelegramBot = require('node-telegram-bot-api'),
 port = process.env.PORT || 443,
 host = '0.0.0.0',
 externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://test-git-bot-1488-228-1337.herokuapp.com',
-//token = process.env.TOKEN,
-bot = new TelegramBot(TOKEN, { webHook: { port : port, host : host } });
-bot.setWebHook(externalUrl + ':443/bot' + TOKEN);
-const options = {
-  polling: true
-};
+token = process.env.TOKEN,
+bot = new TelegramBot(token, { webHook: { port : port, host : host } });
+bot.setWebHook(externalUrl + ':443/bot' + token);
+
 //const bot = new TelegramBot(TOKEN, options);
 
 var contactId = '';
@@ -34,9 +32,13 @@ var dayToInsert;
 
 var login;
 
+var loginSF = process.env.SF_ORG_LOGIN;
+var passwordSF = process.env.SF_ORG_PASSWORD;
+
+
 bot.onText(/\/start/, msg => {
 
-  conn.login('expenseapplication@sccraft.com', 'asdfg123', function(err, res) {
+  conn.login(loginSF, passwordSF, function(err, res) {
 
     if (err) {  
        bot.sendMessage(msg.chat.id, 'Ошибка авторизации в Salesforce');
