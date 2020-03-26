@@ -9,8 +9,8 @@
     "engines": {
         "node": "10.15.2"
     },
-    "author": "ya",
-    "license": "VILEYKA CORP",
+    "author": "veronika",
+    "license": "12345",
     "dependencies": {
         "jsforce": "^1.9.3",
         "node-telegram-bot-api": "^0.40.0"
