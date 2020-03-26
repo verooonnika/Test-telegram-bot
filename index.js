@@ -4,9 +4,11 @@ const TelegramBot = require("node-telegram-bot-api"),
   externalUrl =
     process.env.CUSTOM_ENV_VARIABLE ||
     "https://test-git-bot-1488-228-1337.herokuapp.com",
-  token = process.env.TOKEN,
-bot = new TelegramBot(token, { webHook: { port : port, host : host } });
-bot.setWebHook(externalUrl + ':443/bot' + token);
+  //token = process.env.TOKEN,
+  token = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
+//bot = new TelegramBot(token, { webHook: { port : port, host : host } });
+//bot.setWebHook(externalUrl + ':443/bot' + token);
+bot = new TelegramBot(token, {polling = true});
 
 var contactId = "";
 
@@ -31,8 +33,11 @@ var dayToInsert;
 
 var login;
 
-var loginSF = process.env.SF_ORG_LOGIN;
-var passwordSF = process.env.SF_ORG_PASSWORD; 
+/*var loginSF = process.env.SF_ORG_LOGIN;
+var passwordSF = process.env.SF_ORG_PASSWORD; */
+var loginSF = 'expenseapplication@sccraft.com';
+var passwordSF = 'asdfg123';
+
 
 function mainMenu(chatId) {
   const opts = {
