@@ -8,7 +8,7 @@ const TelegramBot = require("node-telegram-bot-api"),
   token = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
 //bot = new TelegramBot(token, { webHook: { port : port, host : host } });
 //bot.setWebHook(externalUrl + ':443/bot' + token);
-bot = new TelegramBot(token, {polling = true});
+bot = new TelegramBot(token, {polling : true});
 
 var contactId = "";
 
