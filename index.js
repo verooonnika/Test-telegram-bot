@@ -4,11 +4,10 @@ const TelegramBot = require("node-telegram-bot-api"),
   externalUrl =
     process.env.CUSTOM_ENV_VARIABLE ||
     "https://test-git-bot-1488-228-1337.herokuapp.com",
-  //token = process.env.TOKEN,
-  token = '1130761603:AAHXziE5hJkYqxxGVDo8Op-eDX63SJpdiCM';
-//bot = new TelegramBot(token, { webHook: { port : port, host : host } });
-//bot.setWebHook(externalUrl + ':443/bot' + token);
-bot = new TelegramBot(token, {polling : true});
+  token = process.env.TOKEN,
+
+bot = new TelegramBot(token, { webHook: { port : port, host : host } });
+bot.setWebHook(externalUrl + ':443/bot' + token);
 
 var contactId = "";
 
@@ -33,10 +32,8 @@ var dayToInsert;
 
 var login;
 
-/*var loginSF = process.env.SF_ORG_LOGIN;
-var passwordSF = process.env.SF_ORG_PASSWORD; */
-var loginSF = 'expenseapplication@sccraft.com';
-var passwordSF = 'asdfg123';
+var loginSF = process.env.SF_ORG_LOGIN;
+var passwordSF = process.env.SF_ORG_PASSWORD; 
 
 
 function mainMenu(chatId) {
@@ -50,7 +47,7 @@ function mainMenu(chatId) {
       ]
     })
   };
-  bot.sendMessage(chatId, "Выберете действие: ", opts);
+  bot.sendMessage(chatId, "Выберете действие: ", opts).then(previousMessage = '');
 }
 
 function insertCard(cardDate, chatId) {
@@ -73,7 +70,7 @@ function getBalance(chatId) {
         balance += res.records[i].Reminder__c;
       }
       balance = (Math.round(balance * 100) / 100).toFixed(2);
-      bot.sendMessage(chatId, "Ваш баланс: " + balance + "$");
+      bot.sendMessage(chatId, "Ваш баланс: " + balance + "$").then(previousMessage = '');
     }
   );
 }
@@ -118,7 +115,6 @@ bot.on("callback_query", callbackQuery => {
 bot.on("message", msg => {
   if (msg.text == "/start") {
     previousMessage = "";
-
     conn.login(loginSF, passwordSF, function(err, res) {
       if (err) {
         bot.sendMessage(msg.chat.id, "Ошибка авторизации в Salesforce");
@@ -128,7 +124,8 @@ bot.on("message", msg => {
           .sendMessage(msg.chat.id, "Введите логин: ")
           .then((previousMessage = "login"));
       }
-    });
+    })
+
   } else if (previousMessage == "login") {
     login = msg.text;
     bot
@@ -152,7 +149,7 @@ bot.on("message", msg => {
         console.log(res);
         if (res.records.length == 0) {
           bot
-            .sendMessage(msg.chat.id, "Invalid login or password ")
+            .sendMessage(msg.chat.id, "Неверный логин или пароль ")
             .then((previousMessage = ""));
           bot
             .sendMessage(msg.chat.id, "Введите логин: ")
@@ -168,9 +165,15 @@ bot.on("message", msg => {
     );
   } else if (previousMessage == "amount") {
     amount = msg.text;
-    bot
+    const amountRegex = /^-?\d+\.?\d*$/;
+    if(amountRegex.test(amount) &&  amount > 0){
+      bot
       .sendMessage(msg.chat.id, "Введите описание: ")
       .then((previousMessage = "description"));
+    } else{
+      bot.sendMessage(msg.chat.id, "Неверный ввод. Введите сумму: ").then((previousMessage = "amount"));
+    }
+
   } else if (previousMessage == "description") {
     description = msg.text;
     cardDate = dayToInsert;
@@ -186,10 +189,16 @@ bot.on("message", msg => {
           return console.error(err, ret);
         }
         bot
-          .sendMessage(msg.chat.id, "Карточка успешно добавлена! ")
+          .sendMessage(msg.chat.id, "Карточка успешно добавлена! ").then(previousMessage = '')
           .then(mainMenu(chatId));
       }
     );
+  } else if(msg.text == "/exit"){
+    console.log(previousMessage);
+    previousMessage = "";
+    bot.sendMessage(msg.chat.id, "Вы вышли из аккаунта")
+    .then((previousMessage = "login"));
+
   }
 });
 
@@ -275,7 +284,7 @@ function sendCalendar(chatId) {
       inline_keyboard: inlineCalendar
     })
   };
-  bot.sendMessage(chatId, "Выберете дату: ", opts);
+  bot.sendMessage(chatId, "Выберете дату: ", opts).then(previousMessage = '');
 }
 
 function changeCalendar() {
@@ -314,9 +323,7 @@ function changeMonthName() {
 }
 
 function getDate(answer) {
-  console.log(answer);
   var newDate = new Date(year, month, answer, 3); 
-  console.log(newDate);
   dayToInsert = newDate;
   insertCard(newDate, chatId);
 }
